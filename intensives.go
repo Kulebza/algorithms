@@ -5,6 +5,16 @@ import "fmt"
 func main() {
 	arr := []int{1, 5, 7, 3, 4, 6, 8, 0}
 	PickSort(arr)
+
+	t := 22
+
+	tree := Node{
+		Value: 1,
+		Left:  &Node{Value: 4, Left: nil, Right: nil},
+		Right: &Node{Value: 5, Left: nil, Right: nil}}
+
+	isPath := hasPathSum(&tree, t)
+	fmt.Print(isPath)
 }
 
 func BubbleSort(arr []int) {
