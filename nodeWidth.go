@@ -2,6 +2,12 @@ package main
 
 import "fmt"
 
+type Node struct {
+	Value int
+	Right *Node
+	Left  *Node
+}
+
 func main() {
 	tree := &Node{
 		Value: 1,
@@ -14,31 +20,28 @@ func main() {
 			Left:  &Node{Value: 2, Left: nil, Right: nil},
 			Right: nil}}
 
-	start(tree)
+	proceed(tree)
 }
 
-func start(node *Node) {
+func proceed(node *Node) {
 	if node == nil {
 		return
 	}
-	fmt.Print(node.Value)
-	goWidth(node)
-}
+	q := []*Node{node}
 
-func goWidth(node *Node) {
-	if node == nil {
-		return
+	for len(q) != 0 {
+		k := len(q)
+		for i := 0; i < k; i++ {
+			cur := q[i]
+			fmt.Print(cur.Value)
+
+			if cur.Left != nil {
+				q = append(q, cur.Left)
+			}
+			if cur.Right != nil {
+				q = append(q, cur.Right)
+			}
+		}
+		q = q[k:]
 	}
-
-	if node.Left != nil {
-		fmt.Print(node.Left.Value)
-	}
-	if node.Right != nil {
-		fmt.Print(node.Right.Value)
-	}
-
-	goWidth(node.Left)
-	goWidth(node.Right)
-
-	return
 }
